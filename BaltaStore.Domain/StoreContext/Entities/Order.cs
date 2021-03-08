@@ -12,7 +12,6 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public Order(Customer customer)
         {
             customer = Customer;
-            Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8).ToUpper();
             CreateDate = DateTime.Now;
             Status = EOrderStatus.Created;
             _items = new List<OrderItem>();
@@ -30,13 +29,44 @@ namespace BaltaStore.Domain.StoreContext.Entities
             _items.Add(item);
         }
 
-        public void AddDelivery(Delivery delivery)
+        // To place an order
+        public void Place()
         {
-            _deliveries.Add(delivery);
+            Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8).ToUpper();
         }
 
-        // To place an order
-        public void Place() { }
+        // To pay an order
+        public void Pay()
+        {
+            Status = EOrderStatus.Paid;
 
+        }
+
+        // To ship an order
+        public void Ship()
+        {
+            // Each 5 products bought = 1 delivery
+            var deliveries = new List<Delivery>();
+            var count = 1;
+            foreach (var item in _items)
+            {
+                if (count == 5)
+                {
+                    count = 1;
+                    deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
+                }
+                count++;
+            }
+
+            deliveries.ForEach(x => x.Ship());
+            deliveries.ForEach(x => _deliveries.Add(x));
+        }
+
+        // To cancel an order
+        public void Cancel()
+        {
+            Status = EOrderStatus.Canceled;
+            _deliveries.ToList().ForEach(x => x.Cancel());
+        }
     }
 }

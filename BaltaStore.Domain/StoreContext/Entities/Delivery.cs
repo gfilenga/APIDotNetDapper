@@ -14,5 +14,16 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public DateTime CreateDate { get; private set; }
         public DateTime EstimatedDeliveryDate { get; private set; }
         public EDeliveryStatus Status { get; private set; }
+
+        public void Ship()
+        {
+            Status = EDeliveryStatus.Shipped;
+        }
+
+        public void Cancel()
+        {
+            // if already delivered, can't cancel            
+            Status = EDeliveryStatus.Canceled;
+        }
     }
 }
