@@ -25,11 +25,14 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public IReadOnlyCollection<OrderItem> Items => _items.ToArray();
         public IReadOnlyCollection<Delivery> Deliveries => _deliveries.ToArray();
 
-        public void AddItem(OrderItem item)
+        public void AddItem(Product product, decimal quantity)
         {
+            if (quantity > product.QuantityOnHand)
+                AddNotification("OrderItem", $"Produto {product.Title} não tem {quantity} em estoque.");
+
+            var item = new OrderItem(product, quantity);
             _items.Add(item);
         }
-
         // To place an order
         public void Place()
         {
@@ -51,6 +54,7 @@ namespace BaltaStore.Domain.StoreContext.Entities
         {
             // Each 5 products bought = 1 delivery
             var deliveries = new List<Delivery>();
+            deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
             var count = 1;
             foreach (var item in _items)
             {
