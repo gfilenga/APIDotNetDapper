@@ -8,7 +8,7 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public Delivery(DateTime estimatedDeliveryDate)
         {
             CreateDate = DateTime.Now;
-            estimatedDeliveryDate = EstimatedDeliveryDate;
+            EstimatedDeliveryDate = estimatedDeliveryDate;
             Status = EDeliveryStatus.Waiting;
         }
         public DateTime CreateDate { get; private set; }

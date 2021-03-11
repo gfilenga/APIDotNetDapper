@@ -12,7 +12,7 @@ namespace BaltaStore.Domain.StoreContext.Entities
         private readonly IList<Delivery> _deliveries;
         public Order(Customer customer)
         {
-            customer = Customer;
+            Customer = customer;
             CreateDate = DateTime.Now;
             Status = EOrderStatus.Created;
             _items = new List<OrderItem>();
@@ -54,7 +54,7 @@ namespace BaltaStore.Domain.StoreContext.Entities
         {
             // Each 5 products bought = 1 delivery
             var deliveries = new List<Delivery>();
-            deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
+            // deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
             var count = 1;
             foreach (var item in _items)
             {

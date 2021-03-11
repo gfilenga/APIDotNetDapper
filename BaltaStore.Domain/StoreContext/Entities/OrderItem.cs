@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using FluentValidator;
 
 namespace BaltaStore.Domain.StoreContext.Entities
@@ -8,12 +6,14 @@ namespace BaltaStore.Domain.StoreContext.Entities
     {
         public OrderItem(Product product, decimal quantity)
         {
-            product = Product;
-            quantity = Quantity;
+            Product = product;
+            Quantity = quantity;
             Price = product.Price;
 
             if (product.QuantityOnHand < quantity)
                 AddNotification("Quantity", "Produto fora de estoque");
+
+            product.DecreaseQuantity(quantity);
         }
         public Product Product { get; private set; }
         public decimal Quantity { get; private set; }

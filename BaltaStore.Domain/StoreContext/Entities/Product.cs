@@ -12,11 +12,11 @@ namespace BaltaStore.Domain.StoreContext.Entities
             decimal price,
             decimal quantity)
         {
-            title = Title;
-            description = Description;
-            image = Image;
-            price = Price;
-            quantity = QuantityOnHand;
+            Title = title;
+            Description = description;
+            Image = image;
+            Price = price;
+            QuantityOnHand = quantity;
         }
         public string Title { get; private set; }
         public string Description { get; private set; }
@@ -27,6 +27,11 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public override string ToString()
         {
             return Title;
+        }
+
+        public void DecreaseQuantity(decimal quantity)
+        {
+            QuantityOnHand -= quantity;
         }
     }
 }

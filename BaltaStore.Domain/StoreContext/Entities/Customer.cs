@@ -17,9 +17,9 @@ namespace BaltaStore.Domain.StoreContext.Entities
             string phone)
         {
             Name = name;
-            document = Document;
-            email = Email;
-            phone = Phone;
+            Document = document;
+            Email = email;
+            Phone = phone;
             _addresses = new List<Address>();
         }
         public Name Name { get; set; }
