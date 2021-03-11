@@ -1,9 +1,9 @@
-namespace BaltaStore.Domain.StoreContext.CustomerCommands.Inputs
+namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
 {
     public class CreateCustomerCommand
     {
         public string FirstName { get; set; }
-    
+
         public string LastName { get; set; }
 
         public string Document { get; set; }
