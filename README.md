@@ -1,3 +1,3 @@
-# Referenciando o domain dentro do projeto de tests
+# Instalando o Dapper
 
-- dotnet add reference ..\BaltaStore.Domain\BaltaStore.Domain.csproj
+- dotnet add package Dapper
