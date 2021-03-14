@@ -22,6 +22,7 @@ namespace BaltaStore.Api.Controllers
         }
         [HttpGet]
         [Route("customers")]
+        [ResponseCache(Duration = 15)] // 15 minutos
         public IEnumerable<ListCustomerQueryResult> Get()
         {
 
